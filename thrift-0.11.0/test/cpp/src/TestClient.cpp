@@ -147,9 +147,6 @@ int main(int argc, char** argv) {
   string certPath = testDir + "/keys/client.crt";
   string keyPath  = testDir + "/keys/client.key";
 
-#if _WIN32
-  transport::TWinsockSingleton::create();
-#endif
   string host = "localhost";
   int port = 9090;
   int numTests = 1;

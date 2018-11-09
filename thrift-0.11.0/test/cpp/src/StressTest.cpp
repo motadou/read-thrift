@@ -238,47 +238,52 @@ public:
   TransportOpenCloseBehavior _behavior;
 };
 
-class TStartObserver : public apache::thrift::server::TServerEventHandler {
+class TStartObserver : public apache::thrift::server::TServerEventHandler 
+{
 public:
-  TStartObserver() : awake_(false) {}
-  virtual void preServe() {
-    apache::thrift::concurrency::Synchronized s(m_);
-    awake_ = true;
-    m_.notifyAll();
-  }
-  void waitForService() {
-    apache::thrift::concurrency::Synchronized s(m_);
-    while (!awake_)
-      m_.waitForever();
-  }
+    TStartObserver() : awake_(false) {}
+    
+    virtual void preServe() 
+    {
+        apache::thrift::concurrency::Synchronized s(m_);
+        awake_ = true;
+        m_.notifyAll();
+    }
+    
+    void waitForService() 
+    {
+        apache::thrift::concurrency::Synchronized s(m_);
+        
+        while (!awake_)
+            m_.waitForever();
+    }
 
 private:
-  apache::thrift::concurrency::Monitor m_;
-  bool awake_;
+    apache::thrift::concurrency::Monitor m_;
+    bool awake_;
 };
 
-int main(int argc, char** argv) {
-#if _WIN32
-  transport::TWinsockSingleton::create();
-#endif
+int main(int argc, char** argv) 
+{
+    int port              = 9091;
+    string clientType     = "regular";
+    string serverType     = "thread-pool";
+    string protocolType   = "binary";
+    size_t workerCount    = 4;
+    size_t clientCount    = 20;
+    size_t loopCount      = 50000;
+    TType loopType        = T_VOID;
+    string callName       = "echoVoid";
+    bool runServer        = true;
+    bool logRequests      = false;
+    string requestLogPath = "./requestlog.tlog";
+    bool replayRequests   = false;
 
-  int port = 9091;
-  string clientType = "regular";
-  string serverType = "thread-pool";
-  string protocolType = "binary";
-  size_t workerCount = 4;
-  size_t clientCount = 20;
-  size_t loopCount = 50000;
-  TType loopType = T_VOID;
-  string callName = "echoVoid";
-  bool runServer = true;
-  bool logRequests = false;
-  string requestLogPath = "./requestlog.tlog";
-  bool replayRequests = false;
+    ostringstream usage;
 
-  ostringstream usage;
-
-  usage << argv[0] << " [--port=<port number>] [--server] [--server-type=<server-type>] "
+    usage << argv[0] 
+        << 
+                      "[--port=<port number>] [--server] [--server-type=<server-type>] "
                       "[--protocol-type=<protocol-type>] [--workers=<worker-count>] "
                       "[--clients=<client-count>] [--loop=<loop-count>] "
                       "[--client-type=<client-type>]" << endl
@@ -287,320 +292,362 @@ int main(int argc, char** argv) {
         << "\thelp           Prints this help text." << endl
         << "\tcall           Service method to call.  Default is " << callName << endl
         << "\tloop           The number of remote thrift calls each client makes.  Default is " << loopCount << endl
-        << "\tport           The port the server and clients should bind to "
-                            "for thrift network connections.  Default is " << port << endl
+        << "\tport           The port the server and clients should bind to for thrift network connections.  Default is " << port << endl
         << "\tserver         Run the Thrift server in this process.  Default is " << runServer << endl
         << "\tserver-type    Type of server, \"simple\" or \"thread-pool\".  Default is " << serverType << endl
         << "\tprotocol-type  Type of protocol, \"binary\", \"ascii\", or \"xml\".  Default is " << protocolType << endl
         << "\tlog-request    Log all request to ./requestlog.tlog. Default is " << logRequests << endl
         << "\treplay-request Replay requests from log file (./requestlog.tlog) Default is " << replayRequests << endl
-        << "\tworkers        Number of thread pools workers.  Only valid "
-                            "for thread-pool server type.  Default is " << workerCount << endl
+        << "\tworkers        Number of thread pools workers.  Only valid for thread-pool server type.  Default is " << workerCount << endl
         << "\tclient-type    Type of client, \"regular\" or \"concurrent\".  Default is " << clientType << endl
         << endl;
 
-  map<string, string> args;
+    map<string, string> args;
 
-  for (int ix = 1; ix < argc; ix++) {
-
-    string arg(argv[ix]);
-
-    if (arg.compare(0, 2, "--") == 0) {
-
-      size_t end = arg.find_first_of("=", 2);
-
-      string key = string(arg, 2, end - 2);
-
-      if (end != string::npos) {
-        args[key] = string(arg, end + 1);
-      } else {
-        args[key] = "true";
-      }
-    } else {
-      throw invalid_argument("Unexcepted command line token: " + arg);
-    }
-  }
-
-  try {
-
-    if (!args["clients"].empty()) {
-      clientCount = atoi(args["clients"].c_str());
-    }
-
-    if (!args["help"].empty()) {
-      cerr << usage.str();
-      return 0;
-    }
-
-    if (!args["loop"].empty()) {
-      loopCount = atoi(args["loop"].c_str());
-    }
-
-    if (!args["call"].empty()) {
-      callName = args["call"];
-    }
-
-    if (!args["port"].empty()) {
-      port = atoi(args["port"].c_str());
-    }
-
-    if (!args["server"].empty()) {
-      runServer = args["server"] == "true";
-    }
-
-    if (!args["log-request"].empty()) {
-      logRequests = args["log-request"] == "true";
-    }
-
-    if (!args["replay-request"].empty()) {
-      replayRequests = args["replay-request"] == "true";
-    }
-
-    if (!args["server-type"].empty()) {
-      serverType = args["server-type"];
-
-      if (serverType == "simple") {
-
-      } else if (serverType == "thread-pool") {
-
-      } else if (serverType == "threaded") {
-
-      } else {
-
-        throw invalid_argument("Unknown server type " + serverType);
-      }
-    }
-    if (!args["client-type"].empty()) {
-      clientType = args["client-type"];
-
-      if (clientType == "regular") {
-
-      } else if (clientType == "concurrent") {
-
-      } else {
-
-        throw invalid_argument("Unknown client type " + clientType);
-      }
-    }
-    if (!args["workers"].empty()) {
-      workerCount = atoi(args["workers"].c_str());
-    }
-
-  } catch (std::exception& e) {
-    cerr << e.what() << endl;
-    cerr << usage.str();
-  }
-
-  stdcxx::shared_ptr<PlatformThreadFactory> threadFactory
-      = stdcxx::shared_ptr<PlatformThreadFactory>(new PlatformThreadFactory());
-
-  // Dispatcher
-  stdcxx::shared_ptr<Server> serviceHandler(new Server());
-
-  if (replayRequests) {
-    stdcxx::shared_ptr<Server> serviceHandler(new Server());
-    stdcxx::shared_ptr<ServiceProcessor> serviceProcessor(new ServiceProcessor(serviceHandler));
-
-    // Transports
-    stdcxx::shared_ptr<TFileTransport> fileTransport(new TFileTransport(requestLogPath));
-    fileTransport->setChunkSize(2 * 1024 * 1024);
-    fileTransport->setMaxEventSize(1024 * 16);
-    fileTransport->seekToEnd();
-
-    // Protocol Factory
-    stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-
-    TFileProcessor fileProcessor(serviceProcessor, protocolFactory, fileTransport);
-
-    fileProcessor.process(0, true);
-    exit(0);
-  }
-
-  if (runServer) {
-
-    stdcxx::shared_ptr<ServiceProcessor> serviceProcessor(new ServiceProcessor(serviceHandler));
-
-    // Transport
-    stdcxx::shared_ptr<TServerSocket> serverSocket(new TServerSocket(port));
-
-    // Transport Factory
-    stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-
-    // Protocol Factory
-    stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-
-    if (logRequests) {
-      // initialize the log file
-      stdcxx::shared_ptr<TFileTransport> fileTransport(new TFileTransport(requestLogPath));
-      fileTransport->setChunkSize(2 * 1024 * 1024);
-      fileTransport->setMaxEventSize(1024 * 16);
-
-      transportFactory
-          = stdcxx::shared_ptr<TTransportFactory>(new TPipedTransportFactory(fileTransport));
-    }
-
-    stdcxx::shared_ptr<TServer> server;
-
-    if (serverType == "simple") {
-
-      server.reset(
-          new TSimpleServer(serviceProcessor, serverSocket, transportFactory, protocolFactory));
-
-    } else if (serverType == "threaded") {
-
-      server.reset(
-          new TThreadedServer(serviceProcessor, serverSocket, transportFactory, protocolFactory));
-
-    } else if (serverType == "thread-pool") {
-
-      stdcxx::shared_ptr<ThreadManager> threadManager
-          = ThreadManager::newSimpleThreadManager(workerCount);
-
-      threadManager->threadFactory(threadFactory);
-      threadManager->start();
-      server.reset(new TThreadPoolServer(serviceProcessor,
-                                         serverSocket,
-                                         transportFactory,
-                                         protocolFactory,
-                                         threadManager));
-    }
-
-    stdcxx::shared_ptr<TStartObserver> observer(new TStartObserver);
-    server->setServerEventHandler(observer);
-    stdcxx::shared_ptr<Thread> serverThread = threadFactory->newThread(server);
-
-    cerr << "Starting the server on port " << port << endl;
-
-    serverThread->start();
-    observer->waitForService();
-
-    // If we aren't running clients, just wait forever for external clients
-    if (clientCount == 0) {
-      serverThread->join();
-    }
-  }
-
-  if (clientCount > 0) { //FIXME: start here for client type?
-
-    Monitor monitor;
-
-    size_t threadCount = 0;
-
-    set<stdcxx::shared_ptr<Thread> > clientThreads;
-
-    if (callName == "echoVoid") {
-      loopType = T_VOID;
-    } else if (callName == "echoByte") {
-      loopType = T_BYTE;
-    } else if (callName == "echoI32") {
-      loopType = T_I32;
-    } else if (callName == "echoI64") {
-      loopType = T_I64;
-    } else if (callName == "echoString") {
-      loopType = T_STRING;
-    } else {
-      throw invalid_argument("Unknown service call " + callName);
-    }
-
-    if(clientType == "regular") {
-      for (size_t ix = 0; ix < clientCount; ix++) {
-
-        stdcxx::shared_ptr<TSocket> socket(new TSocket("127.0.0.1", port));
-        stdcxx::shared_ptr<TBufferedTransport> bufferedSocket(new TBufferedTransport(socket, 2048));
-        stdcxx::shared_ptr<TProtocol> protocol(new TBinaryProtocol(bufferedSocket));
-        stdcxx::shared_ptr<ServiceClient> serviceClient(new ServiceClient(protocol));
-
-        clientThreads.insert(threadFactory->newThread(stdcxx::shared_ptr<ClientThread>(
-            new ClientThread(socket, serviceClient, monitor, threadCount, loopCount, loopType, OpenAndCloseTransportInThread))));
-      }
-    } else if(clientType == "concurrent") {
-      stdcxx::shared_ptr<TSocket> socket(new TSocket("127.0.0.1", port));
-      stdcxx::shared_ptr<TBufferedTransport> bufferedSocket(new TBufferedTransport(socket, 2048));
-      stdcxx::shared_ptr<TProtocol> protocol(new TBinaryProtocol(bufferedSocket));
-      //stdcxx::shared_ptr<ServiceClient> serviceClient(new ServiceClient(protocol));
-      stdcxx::shared_ptr<ServiceConcurrentClient> serviceClient(new ServiceConcurrentClient(protocol));
-      socket->open();
-      for (size_t ix = 0; ix < clientCount; ix++) {
-        clientThreads.insert(threadFactory->newThread(stdcxx::shared_ptr<ClientThread>(
-            new ClientThread(socket, serviceClient, monitor, threadCount, loopCount, loopType, DontOpenAndCloseTransportInThread))));
-      }
-    }
-
-    for (std::set<stdcxx::shared_ptr<Thread> >::const_iterator thread = clientThreads.begin();
-         thread != clientThreads.end();
-         thread++) {
-      (*thread)->start();
-    }
-
-    int64_t time00;
-    int64_t time01;
-
+    for (int ix = 1; ix < argc; ix++) 
     {
-      Synchronized s(monitor);
-      threadCount = clientCount;
+        string arg(argv[ix]);
 
-      cerr << "Launch " << clientCount << " " << clientType << " client threads" << endl;
+        if (arg.compare(0, 2, "--") == 0) 
+        {
+            size_t end = arg.find_first_of("=", 2);
 
-      time00 = Util::currentTime();
+            string key = string(arg, 2, end - 2);
 
-      monitor.notifyAll();
-
-      while (threadCount > 0) {
-        monitor.wait();
-      }
-
-      time01 = Util::currentTime();
+            if (end != string::npos) 
+            {
+                args[key] = string(arg, end + 1);
+            } 
+            else 
+            {
+                args[key] = "true";
+            }
+        } 
+        else 
+        {
+            throw invalid_argument("Unexcepted command line token: " + arg);
+        }
     }
 
-    int64_t firstTime = 9223372036854775807LL;
-    int64_t lastTime = 0;
+    try 
+    {
+        if (!args["clients"].empty()) 
+        {
+            clientCount = atoi(args["clients"].c_str());
+        }
 
-    double averageTime = 0;
-    int64_t minTime = 9223372036854775807LL;
-    int64_t maxTime = 0;
+        if (!args["help"].empty()) 
+        {
+            cerr << usage.str();
+            return 0;
+        }
 
-    for (set<stdcxx::shared_ptr<Thread> >::iterator ix = clientThreads.begin();
-         ix != clientThreads.end();
-         ix++) {
+        if (!args["loop"].empty()) 
+        {
+            loopCount = atoi(args["loop"].c_str());
+        }
 
-      stdcxx::shared_ptr<ClientThread> client
-          = stdcxx::dynamic_pointer_cast<ClientThread>((*ix)->runnable());
+        if (!args["call"].empty()) 
+        {
+            callName = args["call"];
+        }
 
-      int64_t delta = client->_endTime - client->_startTime;
+        if (!args["port"].empty()) 
+        {
+            port = atoi(args["port"].c_str());
+        }
 
-      assert(delta > 0);
+        if (!args["server"].empty()) 
+        {
+            runServer = args["server"] == "true";
+        }
 
-      if (client->_startTime < firstTime) {
-        firstTime = client->_startTime;
-      }
+        if (!args["log-request"].empty()) 
+        {
+            logRequests = args["log-request"] == "true";
+        }
 
-      if (client->_endTime > lastTime) {
-        lastTime = client->_endTime;
-      }
+        if (!args["replay-request"].empty()) 
+        {
+            replayRequests = args["replay-request"] == "true";
+        }
 
-      if (delta < minTime) {
-        minTime = delta;
-      }
+        if (!args["server-type"].empty()) 
+        {
+            serverType = args["server-type"];
 
-      if (delta > maxTime) {
-        maxTime = delta;
-      }
+            if (serverType == "simple") 
+            {
 
-      averageTime += delta;
+            } 
+            else if (serverType == "thread-pool") 
+            {
+
+            } 
+            else if (serverType == "threaded") 
+            {
+
+            } 
+            else 
+            {
+                throw invalid_argument("Unknown server type " + serverType);
+            }
+        }
+
+        if (!args["client-type"].empty()) 
+        {
+            clientType = args["client-type"];
+
+            if (clientType == "regular") 
+            {
+
+            } 
+            else if (clientType == "concurrent") 
+            {
+
+            } 
+            else 
+            {
+                throw invalid_argument("Unknown client type " + clientType);
+            }
+        }
+        
+        if (!args["workers"].empty()) 
+        {
+            workerCount = atoi(args["workers"].c_str());
+        }
+    } 
+    catch (std::exception& e) 
+    {
+        cerr << e.what() << endl;
+        cerr << usage.str();
     }
 
-    averageTime /= clientCount;
+    stdcxx::shared_ptr<PlatformThreadFactory> threadFactory = stdcxx::shared_ptr<PlatformThreadFactory>(new PlatformThreadFactory());
 
-    cout << "workers :" << workerCount << ", client : " << clientCount << ", loops : " << loopCount
-         << ", rate : " << (clientCount * loopCount * 1000) / ((double)(time01 - time00)) << endl;
+    // Dispatcher
+    stdcxx::shared_ptr<Server> serviceHandler(new Server());
 
-    count_map count = serviceHandler->getCount();
-    count_map::iterator iter;
-    for (iter = count.begin(); iter != count.end(); ++iter) {
-      printf("%s => %d\n", iter->first, iter->second);
+    if (replayRequests) 
+    {
+        stdcxx::shared_ptr<Server> serviceHandler(new Server());
+        stdcxx::shared_ptr<ServiceProcessor> serviceProcessor(new ServiceProcessor(serviceHandler));
+
+        // Transports
+        stdcxx::shared_ptr<TFileTransport> fileTransport(new TFileTransport(requestLogPath));
+        fileTransport->setChunkSize(2 * 1024 * 1024);
+        fileTransport->setMaxEventSize(1024 * 16);
+        fileTransport->seekToEnd();
+
+        // Protocol Factory
+        stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+
+        TFileProcessor fileProcessor(serviceProcessor, protocolFactory, fileTransport);
+
+        fileProcessor.process(0, true);
+
+        exit(0);
     }
-    cerr << "done." << endl;
-  }
 
-  return 0;
+    if (runServer) 
+    {
+        stdcxx::shared_ptr<ServiceProcessor> serviceProcessor(new ServiceProcessor(serviceHandler));
+
+        // Transport
+        stdcxx::shared_ptr<TServerSocket> serverSocket(new TServerSocket(port));
+
+        // Transport Factory
+        stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+
+        // Protocol Factory
+        stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+
+        if (logRequests) 
+        {
+            // initialize the log file
+            stdcxx::shared_ptr<TFileTransport> fileTransport(new TFileTransport(requestLogPath));
+            fileTransport->setChunkSize(2 * 1024 * 1024);
+            fileTransport->setMaxEventSize(1024 * 16);
+
+            transportFactory = stdcxx::shared_ptr<TTransportFactory>(new TPipedTransportFactory(fileTransport));
+        }
+
+        stdcxx::shared_ptr<TServer> server;
+
+        if (serverType == "simple") 
+        {
+            server.reset(new TSimpleServer(serviceProcessor, serverSocket, transportFactory, protocolFactory));
+        } 
+        else if (serverType == "threaded") 
+        {
+            server.reset(new TThreadedServer(serviceProcessor, serverSocket, transportFactory, protocolFactory));
+        } 
+        else if (serverType == "thread-pool") 
+        {
+            stdcxx::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(workerCount);
+
+            threadManager->threadFactory(threadFactory);
+            threadManager->start();
+            server.reset(new TThreadPoolServer(serviceProcessor, serverSocket, transportFactory, protocolFactory, threadManager));
+        }
+
+        stdcxx::shared_ptr<TStartObserver> observer(new TStartObserver);
+        server->setServerEventHandler(observer);
+        stdcxx::shared_ptr<Thread> serverThread = threadFactory->newThread(server);
+
+        cerr << "Starting the server on port " << port << endl;
+
+        serverThread->start();
+        observer->waitForService();
+
+        // If we aren't running clients, just wait forever for external clients
+        if (clientCount == 0) 
+        {
+            serverThread->join();
+        }
+    }
+
+    if (clientCount > 0) 
+    { 
+        //FIXME: start here for client type?
+
+        Monitor monitor;
+
+        size_t threadCount = 0;
+
+        set<stdcxx::shared_ptr<Thread> > clientThreads;
+
+        if (callName == "echoVoid") 
+        {
+            loopType = T_VOID;
+        } 
+        else if (callName == "echoByte") 
+        {
+            loopType = T_BYTE;
+        } 
+        else if (callName == "echoI32") 
+        {
+            loopType = T_I32;
+        } 
+        else if (callName == "echoI64") 
+        {
+            loopType = T_I64;
+        } 
+        else if (callName == "echoString") 
+        {
+            loopType = T_STRING;
+        } 
+        else 
+        {
+            throw invalid_argument("Unknown service call " + callName);
+        }
+
+        if (clientType == "regular") 
+        {
+            for (size_t ix = 0; ix < clientCount; ix++) 
+            {
+                stdcxx::shared_ptr<TSocket> socket(new TSocket("127.0.0.1", port));
+                stdcxx::shared_ptr<TBufferedTransport> bufferedSocket(new TBufferedTransport(socket, 2048));
+                stdcxx::shared_ptr<TProtocol> protocol(new TBinaryProtocol(bufferedSocket));
+                stdcxx::shared_ptr<ServiceClient> serviceClient(new ServiceClient(protocol));
+
+                clientThreads.insert(threadFactory->newThread(stdcxx::shared_ptr<ClientThread>(new ClientThread(socket, serviceClient, monitor, threadCount, loopCount, loopType, OpenAndCloseTransportInThread))));
+            }
+        } 
+        else if (clientType == "concurrent") 
+        {
+            stdcxx::shared_ptr<TSocket> socket(new TSocket("127.0.0.1", port));
+            stdcxx::shared_ptr<TBufferedTransport> bufferedSocket(new TBufferedTransport(socket, 2048));
+            stdcxx::shared_ptr<TProtocol> protocol(new TBinaryProtocol(bufferedSocket));
+            //stdcxx::shared_ptr<ServiceClient> serviceClient(new ServiceClient(protocol));
+            stdcxx::shared_ptr<ServiceConcurrentClient> serviceClient(new ServiceConcurrentClient(protocol));
+            socket->open();
+            for (size_t ix = 0; ix < clientCount; ix++) 
+            {
+                clientThreads.insert(threadFactory->newThread(stdcxx::shared_ptr<ClientThread>(new ClientThread(socket, serviceClient, monitor, threadCount, loopCount, loopType, DontOpenAndCloseTransportInThread))));
+            }
+        }
+
+        for (std::set<stdcxx::shared_ptr<Thread> >::const_iterator thread = clientThreads.begin(); thread != clientThreads.end(); thread++) 
+        {
+            (*thread)->start();
+        }
+
+        int64_t time00;
+        int64_t time01;
+
+        {
+            Synchronized s(monitor);
+            threadCount = clientCount;
+
+            cerr << "Launch " << clientCount << " " << clientType << " client threads" << endl;
+
+            time00 = Util::currentTime();
+
+            monitor.notifyAll();
+
+            while (threadCount > 0) 
+            {
+                monitor.wait();
+            }
+
+            time01 = Util::currentTime();
+        }
+
+        int64_t firstTime  = 9223372036854775807LL;
+        int64_t lastTime   = 0;
+
+        double averageTime = 0;
+        int64_t minTime    = 9223372036854775807LL;
+        int64_t maxTime    = 0;
+
+        for (set<stdcxx::shared_ptr<Thread> >::iterator ix = clientThreads.begin(); ix != clientThreads.end(); ix++) 
+        {
+            stdcxx::shared_ptr<ClientThread> client = stdcxx::dynamic_pointer_cast<ClientThread>((*ix)->runnable());
+
+            int64_t delta = client->_endTime - client->_startTime;
+
+            assert(delta > 0);
+
+            if (client->_startTime < firstTime) 
+            {
+                firstTime = client->_startTime;
+            }
+
+            if (client->_endTime > lastTime) 
+            {
+                lastTime = client->_endTime;
+            }
+
+            if (delta < minTime) 
+            {
+                minTime = delta;
+            }
+
+            if (delta > maxTime) 
+            {
+                maxTime = delta;
+            }
+
+            averageTime += delta;
+        }
+
+        averageTime /= clientCount;
+
+        cout 
+            << "workers :"  << workerCount 
+            << ", client : " << clientCount 
+            << ", loops : " << loopCount
+            << ", rate : " << (clientCount * loopCount * 1000) / ((double)(time01 - time00)) << endl;
+
+        count_map count = serviceHandler->getCount();
+        count_map::iterator iter;
+        for (iter = count.begin(); iter != count.end(); ++iter) 
+        {
+            printf("%s => %d\n", iter->first, iter->second);
+        }
+        cerr << "done." << endl;
+    }
+
+    return 0;
 }
