@@ -1,0 +1,597 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', '../../' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.25
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/home/kevintian/thrift/thrift-0.11.0',
+5 verbose install   [ 'node-int64',
+5 verbose install     'q',
+5 verbose install     'ws',
+5 verbose install     'buffer-equals',
+5 verbose install     'commander',
+5 verbose install     'connect',
+5 verbose install     'istanbul',
+5 verbose install     'jsdoc',
+5 verbose install     'minimatch',
+5 verbose install     'phantomjs-prebuilt',
+5 verbose install     'run-browser',
+5 verbose install     'tape',
+5 verbose install     'utf-8-validate' ] ]
+6 info preinstall thrift@0.11.0
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'node-int64@^0.4.0', null ]
+9 verbose cache add name=undefined spec="node-int64@^0.4.0" args=["node-int64@^0.4.0",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'node-int64@^0.4.0',
+10 verbose parsed url   path: 'node-int64@^0.4.0',
+10 verbose parsed url   href: 'node-int64@^0.4.0' }
+11 verbose cache add name="node-int64" spec="^0.4.0" args=["node-int64","^0.4.0"]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: '^0.4.0',
+12 verbose parsed url   path: '^0.4.0',
+12 verbose parsed url   href: '^0.4.0' }
+13 verbose addNamed [ 'node-int64', '^0.4.0' ]
+14 verbose addNamed [ null, '>=0.4.0-0 <0.5.0-0' ]
+15 verbose cache add [ 'q@^1.5.0', null ]
+16 verbose cache add name=undefined spec="q@^1.5.0" args=["q@^1.5.0",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'q@^1.5.0',
+17 verbose parsed url   path: 'q@^1.5.0',
+17 verbose parsed url   href: 'q@^1.5.0' }
+18 verbose cache add name="q" spec="^1.5.0" args=["q","^1.5.0"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '^1.5.0',
+19 verbose parsed url   path: '^1.5.0',
+19 verbose parsed url   href: '^1.5.0' }
+20 verbose addNamed [ 'q', '^1.5.0' ]
+21 verbose addNamed [ null, '>=1.5.0-0 <2.0.0-0' ]
+22 silly lockFile 602f9811-node-int64-0-4-0 node-int64@^0.4.0
+23 verbose lock node-int64@^0.4.0 /home/mqq/.npm/602f9811-node-int64-0-4-0.lock
+24 verbose cache add [ 'ws@>= 2.2.3', null ]
+25 verbose cache add name=undefined spec="ws@>= 2.2.3" args=["ws@>= 2.2.3",null]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: 'ws@%3E=%202.2.3',
+26 verbose parsed url   path: 'ws@%3E=%202.2.3',
+26 verbose parsed url   href: 'ws@%3E=%202.2.3' }
+27 verbose cache add name="ws" spec=">= 2.2.3" args=["ws",">= 2.2.3"]
+28 verbose parsed url { protocol: null,
+28 verbose parsed url   slashes: null,
+28 verbose parsed url   auth: null,
+28 verbose parsed url   host: null,
+28 verbose parsed url   port: null,
+28 verbose parsed url   hostname: null,
+28 verbose parsed url   hash: null,
+28 verbose parsed url   search: null,
+28 verbose parsed url   query: null,
+28 verbose parsed url   pathname: '%3E=%202.2.3',
+28 verbose parsed url   path: '%3E=%202.2.3',
+28 verbose parsed url   href: '%3E=%202.2.3' }
+29 verbose addNamed [ 'ws', '>= 2.2.3' ]
+30 verbose addNamed [ null, '>=2.2.3' ]
+31 silly lockFile 57ede75b-ws-2-2-3 ws@>= 2.2.3
+32 verbose lock ws@>= 2.2.3 /home/mqq/.npm/57ede75b-ws-2-2-3.lock
+33 verbose cache add [ 'buffer-equals@^1.0.4', null ]
+34 verbose cache add name=undefined spec="buffer-equals@^1.0.4" args=["buffer-equals@^1.0.4",null]
+35 verbose parsed url { protocol: null,
+35 verbose parsed url   slashes: null,
+35 verbose parsed url   auth: null,
+35 verbose parsed url   host: null,
+35 verbose parsed url   port: null,
+35 verbose parsed url   hostname: null,
+35 verbose parsed url   hash: null,
+35 verbose parsed url   search: null,
+35 verbose parsed url   query: null,
+35 verbose parsed url   pathname: 'buffer-equals@^1.0.4',
+35 verbose parsed url   path: 'buffer-equals@^1.0.4',
+35 verbose parsed url   href: 'buffer-equals@^1.0.4' }
+36 verbose cache add name="buffer-equals" spec="^1.0.4" args=["buffer-equals","^1.0.4"]
+37 verbose parsed url { protocol: null,
+37 verbose parsed url   slashes: null,
+37 verbose parsed url   auth: null,
+37 verbose parsed url   host: null,
+37 verbose parsed url   port: null,
+37 verbose parsed url   hostname: null,
+37 verbose parsed url   hash: null,
+37 verbose parsed url   search: null,
+37 verbose parsed url   query: null,
+37 verbose parsed url   pathname: '^1.0.4',
+37 verbose parsed url   path: '^1.0.4',
+37 verbose parsed url   href: '^1.0.4' }
+38 verbose addNamed [ 'buffer-equals', '^1.0.4' ]
+39 verbose addNamed [ null, '>=1.0.4-0 <2.0.0-0' ]
+40 silly lockFile 378be54a-buffer-equals-1-0-4 buffer-equals@^1.0.4
+41 verbose lock buffer-equals@^1.0.4 /home/mqq/.npm/378be54a-buffer-equals-1-0-4.lock
+42 verbose cache add [ 'commander@^2.11.0', null ]
+43 verbose cache add name=undefined spec="commander@^2.11.0" args=["commander@^2.11.0",null]
+44 verbose parsed url { protocol: null,
+44 verbose parsed url   slashes: null,
+44 verbose parsed url   auth: null,
+44 verbose parsed url   host: null,
+44 verbose parsed url   port: null,
+44 verbose parsed url   hostname: null,
+44 verbose parsed url   hash: null,
+44 verbose parsed url   search: null,
+44 verbose parsed url   query: null,
+44 verbose parsed url   pathname: 'commander@^2.11.0',
+44 verbose parsed url   path: 'commander@^2.11.0',
+44 verbose parsed url   href: 'commander@^2.11.0' }
+45 verbose cache add name="commander" spec="^2.11.0" args=["commander","^2.11.0"]
+46 verbose parsed url { protocol: null,
+46 verbose parsed url   slashes: null,
+46 verbose parsed url   auth: null,
+46 verbose parsed url   host: null,
+46 verbose parsed url   port: null,
+46 verbose parsed url   hostname: null,
+46 verbose parsed url   hash: null,
+46 verbose parsed url   search: null,
+46 verbose parsed url   query: null,
+46 verbose parsed url   pathname: '^2.11.0',
+46 verbose parsed url   path: '^2.11.0',
+46 verbose parsed url   href: '^2.11.0' }
+47 verbose addNamed [ 'commander', '^2.11.0' ]
+48 verbose addNamed [ null, '>=2.11.0-0 <3.0.0-0' ]
+49 silly lockFile 409e8113-commander-2-11-0 commander@^2.11.0
+50 verbose lock commander@^2.11.0 /home/mqq/.npm/409e8113-commander-2-11-0.lock
+51 silly lockFile d8f4c2f0-q-1-5-0 q@^1.5.0
+52 verbose lock q@^1.5.0 /home/mqq/.npm/d8f4c2f0-q-1-5-0.lock
+53 verbose cache add [ 'connect@^3.6.4', null ]
+54 verbose cache add name=undefined spec="connect@^3.6.4" args=["connect@^3.6.4",null]
+55 verbose parsed url { protocol: null,
+55 verbose parsed url   slashes: null,
+55 verbose parsed url   auth: null,
+55 verbose parsed url   host: null,
+55 verbose parsed url   port: null,
+55 verbose parsed url   hostname: null,
+55 verbose parsed url   hash: null,
+55 verbose parsed url   search: null,
+55 verbose parsed url   query: null,
+55 verbose parsed url   pathname: 'connect@^3.6.4',
+55 verbose parsed url   path: 'connect@^3.6.4',
+55 verbose parsed url   href: 'connect@^3.6.4' }
+56 verbose cache add name="connect" spec="^3.6.4" args=["connect","^3.6.4"]
+57 verbose parsed url { protocol: null,
+57 verbose parsed url   slashes: null,
+57 verbose parsed url   auth: null,
+57 verbose parsed url   host: null,
+57 verbose parsed url   port: null,
+57 verbose parsed url   hostname: null,
+57 verbose parsed url   hash: null,
+57 verbose parsed url   search: null,
+57 verbose parsed url   query: null,
+57 verbose parsed url   pathname: '^3.6.4',
+57 verbose parsed url   path: '^3.6.4',
+57 verbose parsed url   href: '^3.6.4' }
+58 verbose addNamed [ 'connect', '^3.6.4' ]
+59 verbose addNamed [ null, '>=3.6.4-0 <4.0.0-0' ]
+60 silly lockFile 73925ed7-connect-3-6-4 connect@^3.6.4
+61 verbose lock connect@^3.6.4 /home/mqq/.npm/73925ed7-connect-3-6-4.lock
+62 verbose cache add [ 'istanbul@^0.4.5', null ]
+63 verbose cache add name=undefined spec="istanbul@^0.4.5" args=["istanbul@^0.4.5",null]
+64 verbose parsed url { protocol: null,
+64 verbose parsed url   slashes: null,
+64 verbose parsed url   auth: null,
+64 verbose parsed url   host: null,
+64 verbose parsed url   port: null,
+64 verbose parsed url   hostname: null,
+64 verbose parsed url   hash: null,
+64 verbose parsed url   search: null,
+64 verbose parsed url   query: null,
+64 verbose parsed url   pathname: 'istanbul@^0.4.5',
+64 verbose parsed url   path: 'istanbul@^0.4.5',
+64 verbose parsed url   href: 'istanbul@^0.4.5' }
+65 verbose cache add name="istanbul" spec="^0.4.5" args=["istanbul","^0.4.5"]
+66 verbose parsed url { protocol: null,
+66 verbose parsed url   slashes: null,
+66 verbose parsed url   auth: null,
+66 verbose parsed url   host: null,
+66 verbose parsed url   port: null,
+66 verbose parsed url   hostname: null,
+66 verbose parsed url   hash: null,
+66 verbose parsed url   search: null,
+66 verbose parsed url   query: null,
+66 verbose parsed url   pathname: '^0.4.5',
+66 verbose parsed url   path: '^0.4.5',
+66 verbose parsed url   href: '^0.4.5' }
+67 verbose addNamed [ 'istanbul', '^0.4.5' ]
+68 verbose addNamed [ null, '>=0.4.5-0 <0.5.0-0' ]
+69 silly lockFile 595b370d-istanbul-0-4-5 istanbul@^0.4.5
+70 verbose lock istanbul@^0.4.5 /home/mqq/.npm/595b370d-istanbul-0-4-5.lock
+71 verbose cache add [ 'jsdoc@>=3.5.5', null ]
+72 verbose cache add name=undefined spec="jsdoc@>=3.5.5" args=["jsdoc@>=3.5.5",null]
+73 verbose parsed url { protocol: null,
+73 verbose parsed url   slashes: null,
+73 verbose parsed url   auth: null,
+73 verbose parsed url   host: null,
+73 verbose parsed url   port: null,
+73 verbose parsed url   hostname: null,
+73 verbose parsed url   hash: null,
+73 verbose parsed url   search: null,
+73 verbose parsed url   query: null,
+73 verbose parsed url   pathname: 'jsdoc@%3E=3.5.5',
+73 verbose parsed url   path: 'jsdoc@%3E=3.5.5',
+73 verbose parsed url   href: 'jsdoc@%3E=3.5.5' }
+74 verbose cache add name="jsdoc" spec=">=3.5.5" args=["jsdoc",">=3.5.5"]
+75 verbose parsed url { protocol: null,
+75 verbose parsed url   slashes: null,
+75 verbose parsed url   auth: null,
+75 verbose parsed url   host: null,
+75 verbose parsed url   port: null,
+75 verbose parsed url   hostname: null,
+75 verbose parsed url   hash: null,
+75 verbose parsed url   search: null,
+75 verbose parsed url   query: null,
+75 verbose parsed url   pathname: '%3E=3.5.5',
+75 verbose parsed url   path: '%3E=3.5.5',
+75 verbose parsed url   href: '%3E=3.5.5' }
+76 verbose addNamed [ 'jsdoc', '>=3.5.5' ]
+77 verbose addNamed [ null, '>=3.5.5' ]
+78 silly lockFile c7c913ab-jsdoc-3-5-5 jsdoc@>=3.5.5
+79 verbose lock jsdoc@>=3.5.5 /home/mqq/.npm/c7c913ab-jsdoc-3-5-5.lock
+80 silly addNameRange { name: 'node-int64',
+80 silly addNameRange   range: '>=0.4.0-0 <0.5.0-0',
+80 silly addNameRange   hasData: false }
+81 silly addNameRange { name: 'ws', range: '>=2.2.3', hasData: false }
+82 silly addNameRange { name: 'buffer-equals',
+82 silly addNameRange   range: '>=1.0.4-0 <2.0.0-0',
+82 silly addNameRange   hasData: false }
+83 verbose cache add [ 'minimatch@^3.0.4', null ]
+84 verbose cache add name=undefined spec="minimatch@^3.0.4" args=["minimatch@^3.0.4",null]
+85 verbose parsed url { protocol: null,
+85 verbose parsed url   slashes: null,
+85 verbose parsed url   auth: null,
+85 verbose parsed url   host: null,
+85 verbose parsed url   port: null,
+85 verbose parsed url   hostname: null,
+85 verbose parsed url   hash: null,
+85 verbose parsed url   search: null,
+85 verbose parsed url   query: null,
+85 verbose parsed url   pathname: 'minimatch@^3.0.4',
+85 verbose parsed url   path: 'minimatch@^3.0.4',
+85 verbose parsed url   href: 'minimatch@^3.0.4' }
+86 verbose cache add name="minimatch" spec="^3.0.4" args=["minimatch","^3.0.4"]
+87 verbose parsed url { protocol: null,
+87 verbose parsed url   slashes: null,
+87 verbose parsed url   auth: null,
+87 verbose parsed url   host: null,
+87 verbose parsed url   port: null,
+87 verbose parsed url   hostname: null,
+87 verbose parsed url   hash: null,
+87 verbose parsed url   search: null,
+87 verbose parsed url   query: null,
+87 verbose parsed url   pathname: '^3.0.4',
+87 verbose parsed url   path: '^3.0.4',
+87 verbose parsed url   href: '^3.0.4' }
+88 verbose addNamed [ 'minimatch', '^3.0.4' ]
+89 verbose addNamed [ null, '>=3.0.4-0 <4.0.0-0' ]
+90 silly lockFile 69284b07-minimatch-3-0-4 minimatch@^3.0.4
+91 verbose lock minimatch@^3.0.4 /home/mqq/.npm/69284b07-minimatch-3-0-4.lock
+92 verbose cache add [ 'phantomjs-prebuilt@^2.1.7', null ]
+93 verbose cache add name=undefined spec="phantomjs-prebuilt@^2.1.7" args=["phantomjs-prebuilt@^2.1.7",null]
+94 verbose parsed url { protocol: null,
+94 verbose parsed url   slashes: null,
+94 verbose parsed url   auth: null,
+94 verbose parsed url   host: null,
+94 verbose parsed url   port: null,
+94 verbose parsed url   hostname: null,
+94 verbose parsed url   hash: null,
+94 verbose parsed url   search: null,
+94 verbose parsed url   query: null,
+94 verbose parsed url   pathname: 'phantomjs-prebuilt@^2.1.7',
+94 verbose parsed url   path: 'phantomjs-prebuilt@^2.1.7',
+94 verbose parsed url   href: 'phantomjs-prebuilt@^2.1.7' }
+95 verbose cache add name="phantomjs-prebuilt" spec="^2.1.7" args=["phantomjs-prebuilt","^2.1.7"]
+96 verbose parsed url { protocol: null,
+96 verbose parsed url   slashes: null,
+96 verbose parsed url   auth: null,
+96 verbose parsed url   host: null,
+96 verbose parsed url   port: null,
+96 verbose parsed url   hostname: null,
+96 verbose parsed url   hash: null,
+96 verbose parsed url   search: null,
+96 verbose parsed url   query: null,
+96 verbose parsed url   pathname: '^2.1.7',
+96 verbose parsed url   path: '^2.1.7',
+96 verbose parsed url   href: '^2.1.7' }
+97 verbose addNamed [ 'phantomjs-prebuilt', '^2.1.7' ]
+98 verbose addNamed [ null, '>=2.1.7-0 <3.0.0-0' ]
+99 silly lockFile 3c198c65-phantomjs-prebuilt-2-1-7 phantomjs-prebuilt@^2.1.7
+100 verbose lock phantomjs-prebuilt@^2.1.7 /home/mqq/.npm/3c198c65-phantomjs-prebuilt-2-1-7.lock
+101 verbose cache add [ 'run-browser@^2.0.2', null ]
+102 verbose cache add name=undefined spec="run-browser@^2.0.2" args=["run-browser@^2.0.2",null]
+103 verbose parsed url { protocol: null,
+103 verbose parsed url   slashes: null,
+103 verbose parsed url   auth: null,
+103 verbose parsed url   host: null,
+103 verbose parsed url   port: null,
+103 verbose parsed url   hostname: null,
+103 verbose parsed url   hash: null,
+103 verbose parsed url   search: null,
+103 verbose parsed url   query: null,
+103 verbose parsed url   pathname: 'run-browser@^2.0.2',
+103 verbose parsed url   path: 'run-browser@^2.0.2',
+103 verbose parsed url   href: 'run-browser@^2.0.2' }
+104 verbose cache add name="run-browser" spec="^2.0.2" args=["run-browser","^2.0.2"]
+105 verbose parsed url { protocol: null,
+105 verbose parsed url   slashes: null,
+105 verbose parsed url   auth: null,
+105 verbose parsed url   host: null,
+105 verbose parsed url   port: null,
+105 verbose parsed url   hostname: null,
+105 verbose parsed url   hash: null,
+105 verbose parsed url   search: null,
+105 verbose parsed url   query: null,
+105 verbose parsed url   pathname: '^2.0.2',
+105 verbose parsed url   path: '^2.0.2',
+105 verbose parsed url   href: '^2.0.2' }
+106 verbose addNamed [ 'run-browser', '^2.0.2' ]
+107 verbose addNamed [ null, '>=2.0.2-0 <3.0.0-0' ]
+108 silly lockFile 720ac53a-run-browser-2-0-2 run-browser@^2.0.2
+109 verbose lock run-browser@^2.0.2 /home/mqq/.npm/720ac53a-run-browser-2-0-2.lock
+110 silly addNameRange { name: 'commander',
+110 silly addNameRange   range: '>=2.11.0-0 <3.0.0-0',
+110 silly addNameRange   hasData: false }
+111 silly addNameRange { name: 'q', range: '>=1.5.0-0 <2.0.0-0', hasData: false }
+112 verbose url raw node-int64
+113 verbose url resolving [ 'https://registry.npmjs.org/', './node-int64' ]
+114 verbose url resolved https://registry.npmjs.org/node-int64
+115 info trying registry request attempt 1 at 21:07:58
+116 http GET https://registry.npmjs.org/node-int64
+117 verbose url raw ws
+118 verbose url resolving [ 'https://registry.npmjs.org/', './ws' ]
+119 verbose url resolved https://registry.npmjs.org/ws
+120 info trying registry request attempt 1 at 21:07:58
+121 http GET https://registry.npmjs.org/ws
+122 verbose url raw buffer-equals
+123 verbose url resolving [ 'https://registry.npmjs.org/', './buffer-equals' ]
+124 verbose url resolved https://registry.npmjs.org/buffer-equals
+125 info trying registry request attempt 1 at 21:07:58
+126 http GET https://registry.npmjs.org/buffer-equals
+127 silly addNameRange { name: 'connect', range: '>=3.6.4-0 <4.0.0-0', hasData: false }
+128 silly addNameRange { name: 'istanbul', range: '>=0.4.5-0 <0.5.0-0', hasData: false }
+129 verbose cache add [ 'tape@^4.8.0', null ]
+130 verbose cache add name=undefined spec="tape@^4.8.0" args=["tape@^4.8.0",null]
+131 verbose parsed url { protocol: null,
+131 verbose parsed url   slashes: null,
+131 verbose parsed url   auth: null,
+131 verbose parsed url   host: null,
+131 verbose parsed url   port: null,
+131 verbose parsed url   hostname: null,
+131 verbose parsed url   hash: null,
+131 verbose parsed url   search: null,
+131 verbose parsed url   query: null,
+131 verbose parsed url   pathname: 'tape@^4.8.0',
+131 verbose parsed url   path: 'tape@^4.8.0',
+131 verbose parsed url   href: 'tape@^4.8.0' }
+132 verbose cache add name="tape" spec="^4.8.0" args=["tape","^4.8.0"]
+133 verbose parsed url { protocol: null,
+133 verbose parsed url   slashes: null,
+133 verbose parsed url   auth: null,
+133 verbose parsed url   host: null,
+133 verbose parsed url   port: null,
+133 verbose parsed url   hostname: null,
+133 verbose parsed url   hash: null,
+133 verbose parsed url   search: null,
+133 verbose parsed url   query: null,
+133 verbose parsed url   pathname: '^4.8.0',
+133 verbose parsed url   path: '^4.8.0',
+133 verbose parsed url   href: '^4.8.0' }
+134 verbose addNamed [ 'tape', '^4.8.0' ]
+135 verbose addNamed [ null, '>=4.8.0-0 <5.0.0-0' ]
+136 silly lockFile c8679a7e-tape-4-8-0 tape@^4.8.0
+137 verbose lock tape@^4.8.0 /home/mqq/.npm/c8679a7e-tape-4-8-0.lock
+138 verbose cache add [ 'utf-8-validate@^3.0.0', null ]
+139 verbose cache add name=undefined spec="utf-8-validate@^3.0.0" args=["utf-8-validate@^3.0.0",null]
+140 verbose parsed url { protocol: null,
+140 verbose parsed url   slashes: null,
+140 verbose parsed url   auth: null,
+140 verbose parsed url   host: null,
+140 verbose parsed url   port: null,
+140 verbose parsed url   hostname: null,
+140 verbose parsed url   hash: null,
+140 verbose parsed url   search: null,
+140 verbose parsed url   query: null,
+140 verbose parsed url   pathname: 'utf-8-validate@^3.0.0',
+140 verbose parsed url   path: 'utf-8-validate@^3.0.0',
+140 verbose parsed url   href: 'utf-8-validate@^3.0.0' }
+141 verbose cache add name="utf-8-validate" spec="^3.0.0" args=["utf-8-validate","^3.0.0"]
+142 verbose parsed url { protocol: null,
+142 verbose parsed url   slashes: null,
+142 verbose parsed url   auth: null,
+142 verbose parsed url   host: null,
+142 verbose parsed url   port: null,
+142 verbose parsed url   hostname: null,
+142 verbose parsed url   hash: null,
+142 verbose parsed url   search: null,
+142 verbose parsed url   query: null,
+142 verbose parsed url   pathname: '^3.0.0',
+142 verbose parsed url   path: '^3.0.0',
+142 verbose parsed url   href: '^3.0.0' }
+143 verbose addNamed [ 'utf-8-validate', '^3.0.0' ]
+144 verbose addNamed [ null, '>=3.0.0-0 <4.0.0-0' ]
+145 silly lockFile 7e5895fe-utf-8-validate-3-0-0 utf-8-validate@^3.0.0
+146 verbose lock utf-8-validate@^3.0.0 /home/mqq/.npm/7e5895fe-utf-8-validate-3-0-0.lock
+147 silly addNameRange { name: 'jsdoc', range: '>=3.5.5', hasData: false }
+148 verbose url raw commander
+149 verbose url resolving [ 'https://registry.npmjs.org/', './commander' ]
+150 verbose url resolved https://registry.npmjs.org/commander
+151 info trying registry request attempt 1 at 21:07:58
+152 http GET https://registry.npmjs.org/commander
+153 verbose url raw q
+154 verbose url resolving [ 'https://registry.npmjs.org/', './q' ]
+155 verbose url resolved https://registry.npmjs.org/q
+156 info trying registry request attempt 1 at 21:07:58
+157 http GET https://registry.npmjs.org/q
+158 verbose url raw connect
+159 verbose url resolving [ 'https://registry.npmjs.org/', './connect' ]
+160 verbose url resolved https://registry.npmjs.org/connect
+161 info trying registry request attempt 1 at 21:07:58
+162 http GET https://registry.npmjs.org/connect
+163 verbose url raw istanbul
+164 verbose url resolving [ 'https://registry.npmjs.org/', './istanbul' ]
+165 verbose url resolved https://registry.npmjs.org/istanbul
+166 info trying registry request attempt 1 at 21:07:58
+167 http GET https://registry.npmjs.org/istanbul
+168 silly addNameRange { name: 'minimatch',
+168 silly addNameRange   range: '>=3.0.4-0 <4.0.0-0',
+168 silly addNameRange   hasData: false }
+169 silly addNameRange { name: 'phantomjs-prebuilt',
+169 silly addNameRange   range: '>=2.1.7-0 <3.0.0-0',
+169 silly addNameRange   hasData: false }
+170 silly addNameRange { name: 'run-browser',
+170 silly addNameRange   range: '>=2.0.2-0 <3.0.0-0',
+170 silly addNameRange   hasData: false }
+171 verbose url raw jsdoc
+172 verbose url resolving [ 'https://registry.npmjs.org/', './jsdoc' ]
+173 verbose url resolved https://registry.npmjs.org/jsdoc
+174 info trying registry request attempt 1 at 21:07:58
+175 http GET https://registry.npmjs.org/jsdoc
+176 verbose url raw minimatch
+177 verbose url resolving [ 'https://registry.npmjs.org/', './minimatch' ]
+178 verbose url resolved https://registry.npmjs.org/minimatch
+179 info trying registry request attempt 1 at 21:07:58
+180 http GET https://registry.npmjs.org/minimatch
+181 verbose url raw phantomjs-prebuilt
+182 verbose url resolving [ 'https://registry.npmjs.org/', './phantomjs-prebuilt' ]
+183 verbose url resolved https://registry.npmjs.org/phantomjs-prebuilt
+184 info trying registry request attempt 1 at 21:07:58
+185 http GET https://registry.npmjs.org/phantomjs-prebuilt
+186 silly addNameRange { name: 'tape', range: '>=4.8.0-0 <5.0.0-0', hasData: false }
+187 silly addNameRange { name: 'utf-8-validate',
+187 silly addNameRange   range: '>=3.0.0-0 <4.0.0-0',
+187 silly addNameRange   hasData: false }
+188 verbose url raw run-browser
+189 verbose url resolving [ 'https://registry.npmjs.org/', './run-browser' ]
+190 verbose url resolved https://registry.npmjs.org/run-browser
+191 info trying registry request attempt 1 at 21:07:58
+192 http GET https://registry.npmjs.org/run-browser
+193 verbose url raw tape
+194 verbose url resolving [ 'https://registry.npmjs.org/', './tape' ]
+195 verbose url resolved https://registry.npmjs.org/tape
+196 info trying registry request attempt 1 at 21:07:58
+197 http GET https://registry.npmjs.org/tape
+198 verbose url raw utf-8-validate
+199 verbose url resolving [ 'https://registry.npmjs.org/', './utf-8-validate' ]
+200 verbose url resolved https://registry.npmjs.org/utf-8-validate
+201 info trying registry request attempt 1 at 21:07:58
+202 http GET https://registry.npmjs.org/utf-8-validate
+203 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+204 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+205 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+206 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+207 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+208 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+209 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+210 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+211 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+212 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+213 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+214 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+215 info trying registry request attempt 2 at 21:08:08
+216 http GET https://registry.npmjs.org/buffer-equals
+217 info trying registry request attempt 2 at 21:08:08
+218 http GET https://registry.npmjs.org/commander
+219 info trying registry request attempt 2 at 21:08:09
+220 http GET https://registry.npmjs.org/connect
+221 info trying registry request attempt 2 at 21:08:09
+222 http GET https://registry.npmjs.org/q
+223 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+224 info trying registry request attempt 2 at 21:08:09
+225 http GET https://registry.npmjs.org/jsdoc
+226 info trying registry request attempt 2 at 21:08:09
+227 http GET https://registry.npmjs.org/istanbul
+228 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+229 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+230 info trying registry request attempt 2 at 21:08:10
+231 http GET https://registry.npmjs.org/run-browser
+232 info trying registry request attempt 2 at 21:08:10
+233 http GET https://registry.npmjs.org/minimatch
+234 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+235 info trying registry request attempt 2 at 21:08:11
+236 http GET https://registry.npmjs.org/tape
+237 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+238 info trying registry request attempt 2 at 21:08:11
+239 http GET https://registry.npmjs.org/ws
+240 info trying registry request attempt 2 at 21:08:11
+241 http GET https://registry.npmjs.org/phantomjs-prebuilt
+242 info trying registry request attempt 2 at 21:08:11
+243 http GET https://registry.npmjs.org/utf-8-validate
+244 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+245 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+246 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+247 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+248 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+249 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+250 info retry will retry, error on last attempt: Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+251 info trying registry request attempt 3 at 21:09:09
+252 http GET https://registry.npmjs.org/connect
+253 info trying registry request attempt 3 at 21:09:10
+254 http GET https://registry.npmjs.org/q
+255 info trying registry request attempt 3 at 21:09:10
+256 http GET https://registry.npmjs.org/buffer-equals
+257 info trying registry request attempt 3 at 21:09:10
+258 http GET https://registry.npmjs.org/istanbul
+259 silly lockFile d8f4c2f0-q-1-5-0 q@^1.5.0
+260 silly lockFile d8f4c2f0-q-1-5-0 q@^1.5.0
+261 error Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+261 error     at SecurePair.<anonymous> (tls.js:1370:32)
+261 error     at SecurePair.EventEmitter.emit (events.js:92:17)
+261 error     at SecurePair.maybeInitFinished (tls.js:982:10)
+261 error     at CleartextStream.read [as _read] (tls.js:469:13)
+261 error     at CleartextStream.Readable.read (_stream_readable.js:320:10)
+261 error     at EncryptedStream.write [as _write] (tls.js:366:25)
+261 error     at doWrite (_stream_writable.js:223:10)
+261 error     at writeOrBuffer (_stream_writable.js:213:5)
+261 error     at EncryptedStream.Writable.write (_stream_writable.js:180:11)
+261 error     at write (_stream_readable.js:583:24)
+261 error     at flow (_stream_readable.js:592:7)
+261 error     at Socket.pipeOnReadable (_stream_readable.js:624:5)
+262 error If you need help, you may report this log at:
+262 error     <http://github.com/isaacs/npm/issues>
+262 error or email it to:
+262 error     <npm-@googlegroups.com>
+263 error System Linux 3.16.0-30-generic
+264 error command "/usr/bin/nodejs" "/usr/bin/npm" "install" "../../"
+265 error cwd /home/kevintian/thrift/thrift-0.11.0/lib/nodejs
+266 error node -v v0.10.25
+267 error npm -v 1.3.10
+268 verbose exit [ 1, true ]
