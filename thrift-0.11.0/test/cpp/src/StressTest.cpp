@@ -39,9 +39,6 @@
 #include <stdexcept>
 #include <sstream>
 #include <map>
-#if _WIN32
-#include <thrift/windows/TWinsockSingleton.h>
-#endif
 
 using namespace std;
 
@@ -53,62 +50,74 @@ using namespace apache::thrift::concurrency;
 
 using namespace test::stress;
 
-struct eqstr {
-  bool operator()(const char* s1, const char* s2) const { return strcmp(s1, s2) == 0; }
+struct eqstr 
+{
+    bool operator()(const char* s1, const char* s2) const { return strcmp(s1, s2) == 0; }
 };
 
-struct ltstr {
-  bool operator()(const char* s1, const char* s2) const { return strcmp(s1, s2) < 0; }
+struct ltstr 
+{
+    bool operator()(const char* s1, const char* s2) const { return strcmp(s1, s2) < 0; }
 };
 
 // typedef hash_map<const char*, int, hash<const char*>, eqstr> count_map;
 typedef map<const char*, int, ltstr> count_map;
 
-class Server : public ServiceIf {
+class Server : public ServiceIf 
+{
 public:
-  Server() {}
+    Server() {}
 
-  void count(const char* method) {
-    Guard m(lock_);
-    int ct = counts_[method];
-    counts_[method] = ++ct;
-  }
-
-  void echoVoid() {
-    count("echoVoid");
-    return;
-  }
-
-  count_map getCount() {
-    Guard m(lock_);
-    return counts_;
-  }
-
-  int8_t echoByte(const int8_t arg) { return arg; }
-  int32_t echoI32(const int32_t arg) { return arg; }
-  int64_t echoI64(const int64_t arg) { return arg; }
-  void echoString(string& out, const string& arg) {
-    if (arg != "hello") {
-      T_ERROR_ABORT("WRONG STRING (%s)!!!!", arg.c_str());
+    void count(const char* method) 
+    {
+        Guard m(lock_);
+        int ct = counts_[method];
+        counts_[method] = ++ct;
     }
-    out = arg;
-  }
-  void echoList(vector<int8_t>& out, const vector<int8_t>& arg) { out = arg; }
-  void echoSet(set<int8_t>& out, const set<int8_t>& arg) { out = arg; }
-  void echoMap(map<int8_t, int8_t>& out, const map<int8_t, int8_t>& arg) { out = arg; }
+
+    void echoVoid() 
+    {
+        count("echoVoid");
+        return;
+    }
+
+    count_map getCount() 
+    {
+        Guard m(lock_);
+        return counts_;
+    }
+
+    int8_t echoByte(const int8_t arg) { return arg; }
+    int32_t echoI32(const int32_t arg) { return arg; }
+    int64_t echoI64(const int64_t arg) { return arg; }
+    void echoString(string& out, const string& arg) 
+    {
+        if (arg != "hello") 
+        {
+            T_ERROR_ABORT("WRONG STRING (%s)!!!!", arg.c_str());
+        }
+        out = arg;
+    }
+    void echoList(vector<int8_t>& out, const vector<int8_t>& arg) { out = arg; }
+    void echoSet(set<int8_t>& out, const set<int8_t>& arg) { out = arg; }
+    void echoMap(map<int8_t, int8_t>& out, const map<int8_t, int8_t>& arg) { out = arg; }
 
 private:
-  count_map counts_;
-  Mutex lock_;
+    count_map counts_;
+
+    Mutex lock_;
 };
 
-enum TransportOpenCloseBehavior {
-  OpenAndCloseTransportInThread,
-  DontOpenAndCloseTransportInThread
+enum TransportOpenCloseBehavior 
+{
+    OpenAndCloseTransportInThread,
+    DontOpenAndCloseTransportInThread
 };
-class ClientThread : public Runnable {
+
+class ClientThread : public Runnable 
+{
 public:
-  ClientThread(stdcxx::shared_ptr<TTransport> transport,
+    ClientThread(stdcxx::shared_ptr<TTransport> transport,
                stdcxx::shared_ptr<ServiceIf> client,
                Monitor& monitor,
                size_t& workerCount,
@@ -123,7 +132,7 @@ public:
       _loopType(loopType),
       _behavior(behavior) {}
 
-  void run() {
+    void run() {
 
     // Wait for all worker threads to start
 
@@ -225,8 +234,8 @@ public:
     }
   }
 
-  stdcxx::shared_ptr<TTransport> _transport;
-  stdcxx::shared_ptr<ServiceIf> _client;
+    stdcxx::shared_ptr<TTransport> _transport;
+    stdcxx::shared_ptr<ServiceIf> _client;
   Monitor& _monitor;
   size_t& _workerCount;
   size_t _loopCount;

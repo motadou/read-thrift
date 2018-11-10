@@ -96,13 +96,14 @@ protected:
  * Thrift server.
  *
  */
-class TServer : public concurrency::Runnable {
+class TServer : public concurrency::Runnable 
+{
 public:
-  virtual ~TServer() {}
+    virtual ~TServer() {}
 
-  virtual void serve() = 0;
+    virtual void serve() = 0;
 
-  virtual void stop() {}
+    virtual void stop() {}
 
   // Allows running the server as a Runnable thread
   virtual void run() { serve(); }

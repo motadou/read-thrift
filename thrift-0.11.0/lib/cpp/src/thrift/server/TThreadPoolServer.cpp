@@ -1,22 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements. See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership. The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
 #include <thrift/server/TThreadPoolServer.h>
 
 namespace apache {
@@ -41,7 +22,9 @@ TThreadPoolServer::TThreadPoolServer(const shared_ptr<TProcessorFactory>& proces
   : TServerFramework(processorFactory, serverTransport, transportFactory, protocolFactory),
     threadManager_(threadManager),
     timeout_(0),
-    taskExpiration_(0) {
+    taskExpiration_(0) 
+{
+
 }
 
 TThreadPoolServer::TThreadPoolServer(const shared_ptr<TProcessor>& processor,
@@ -52,7 +35,9 @@ TThreadPoolServer::TThreadPoolServer(const shared_ptr<TProcessor>& processor,
   : TServerFramework(processor, serverTransport, transportFactory, protocolFactory),
     threadManager_(threadManager),
     timeout_(0),
-    taskExpiration_(0) {
+    taskExpiration_(0) 
+{
+
 }
 
 TThreadPoolServer::TThreadPoolServer(const shared_ptr<TProcessorFactory>& processorFactory,
@@ -88,43 +73,57 @@ TThreadPoolServer::TThreadPoolServer(const shared_ptr<TProcessor>& processor,
                      outputProtocolFactory),
     threadManager_(threadManager),
     timeout_(0),
-    taskExpiration_(0) {
+    taskExpiration_(0) 
+{
+
 }
 
-TThreadPoolServer::~TThreadPoolServer() {
+TThreadPoolServer::~TThreadPoolServer() 
+{
+
 }
 
-void TThreadPoolServer::serve() {
-  TServerFramework::serve();
-  threadManager_->stop();
+void TThreadPoolServer::serve() 
+{
+    TServerFramework::serve();
+
+    threadManager_->stop();
 }
 
-int64_t TThreadPoolServer::getTimeout() const {
-  return timeout_;
+int64_t TThreadPoolServer::getTimeout() const 
+{
+    return timeout_;
 }
 
-void TThreadPoolServer::setTimeout(int64_t value) {
-  timeout_ = value;
+void TThreadPoolServer::setTimeout(int64_t value) 
+{
+    timeout_ = value;
 }
 
-int64_t TThreadPoolServer::getTaskExpiration() const {
-  return taskExpiration_;
+int64_t TThreadPoolServer::getTaskExpiration() const 
+{
+    return taskExpiration_;
 }
 
-void TThreadPoolServer::setTaskExpiration(int64_t value) {
-  taskExpiration_ = value;
+void TThreadPoolServer::setTaskExpiration(int64_t value) 
+{
+    taskExpiration_ = value;
 }
 
 stdcxx::shared_ptr<apache::thrift::concurrency::ThreadManager>
-TThreadPoolServer::getThreadManager() const {
-  return threadManager_;
+TThreadPoolServer::getThreadManager() const 
+{
+    return threadManager_;
 }
 
-void TThreadPoolServer::onClientConnected(const shared_ptr<TConnectedClient>& pClient) {
-  threadManager_->add(pClient, getTimeout(), getTaskExpiration());
+void TThreadPoolServer::onClientConnected(const shared_ptr<TConnectedClient>& pClient) 
+{
+    threadManager_->add(pClient, getTimeout(), getTaskExpiration());
 }
 
-void TThreadPoolServer::onClientDisconnected(TConnectedClient*) {
+void TThreadPoolServer::onClientDisconnected(TConnectedClient*) 
+{
+
 }
 
 }
